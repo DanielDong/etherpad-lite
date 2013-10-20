@@ -76,7 +76,8 @@ exports.setSocketIO = function(socket_io)
 exports.handleConnect = function(client)
 {
   stats.meter('handleConnect').mark();
-  // stats.totalUsers.inc();
+  stats.counter('totalUsers').inc();
+
   //Initalize sessioninfos for this new session
   sessioninfos[client.id]={};
 }
@@ -101,7 +102,8 @@ exports.kickSessionsFromPad = function(padID)
  */
 exports.handleDisconnect = function(client)
 {  
-  // stats.totalUsers.dec();
+  stats.counter('totalUsers').dec();
+
   //save the padname of this session
   var session = sessioninfos[client.id];
   
@@ -1009,6 +1011,8 @@ function handleClientReady(client, message)
       //If this is a reconnect, we don't have to send the client the ClientVars again
       if(message.reconnect == true)
       {
+        stats.counter('totalUsers').dec();
+
         //Join the pad and start receiving updates
         client.join(padIds.padId);
         //Save the revision in sessioninfos, we take the revision from the info the client send to us

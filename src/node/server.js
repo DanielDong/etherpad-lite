@@ -49,6 +49,7 @@ async.waterfall([
     hooks.plugins = plugins;
     metrics = require('measured');
     stats = new metrics.Collection();
+    stats.counter('totalUsers');
     callback();
   },
   
