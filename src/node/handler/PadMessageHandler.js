@@ -637,6 +637,7 @@ function handleUserChanges(data, cb)
       {
         // There is an error in this changeset, so just refuse it
         client.json.send({disconnect:"badChangeset"});
+        stats.meter('badChangeset').mark();
         return callback(new Error("Can't apply USER_CHANGES, because "+e.message));
       }
         
@@ -667,6 +668,7 @@ function handleUserChanges(data, cb)
               changeset = Changeset.follow(c, changeset, false, apool);
             }catch(e){
               client.json.send({disconnect:"badChangeset"});
+              stats.meter("cantApplyUSER_CHANGES").mark();
               return callback(new Error("Can't apply USER_CHANGES, because "+e.message));
             }
 
