@@ -74,8 +74,9 @@ exports.setSocketIO = function(socket_io)
  * @param client the new client
  */
 exports.handleConnect = function(client)
-{  
+{
   stats.meter('handleConnect').mark();
+  // stats.totalUsers.inc();
   //Initalize sessioninfos for this new session
   sessioninfos[client.id]={};
 }
@@ -100,6 +101,7 @@ exports.kickSessionsFromPad = function(padID)
  */
 exports.handleDisconnect = function(client)
 {  
+  // stats.totalUsers.dec();
   //save the padname of this session
   var session = sessioninfos[client.id];
   
@@ -793,7 +795,7 @@ exports.updatePadClients = function(pad, callback)
 }
 
 /**
- * Copied from the Etherpad Source Code. Don't know what this methode does excatly...
+ * Copied from the Etherpad Source Code. Don't know what this method does excatly...
  */
 function _correctMarkersInPad(atext, apool) {
   var text = atext.text;

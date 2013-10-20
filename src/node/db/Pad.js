@@ -366,6 +366,7 @@ Pad.prototype.getChatMessages = function getChatMessages(start, end, callback) {
 };
 
 Pad.prototype.init = function init(text, callback) {
+  
   var _this = this;
 
   //replace text with default text if text isn't set

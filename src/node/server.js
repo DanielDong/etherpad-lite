@@ -47,8 +47,8 @@ async.waterfall([
     plugins = require("ep_etherpad-lite/static/js/pluginfw/plugins");
     hooks = require("ep_etherpad-lite/static/js/pluginfw/hooks");
     hooks.plugins = plugins;
-    stats = require('measured').createCollection();
-
+    metrics = require('measured');
+    stats = new metrics.Collection();
     callback();
   },
   

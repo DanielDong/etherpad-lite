@@ -91,6 +91,7 @@ exports.basicAuth = function (req, res, next) {
 exports.secret = null;
 
 exports.expressConfigure = function (hook_name, args, cb) {
+  console.warn("ASD");
   // If the log level specified in the config file is WARN or ERROR the application server never starts listening to requests as reported in issue #158.
   // Not installing the log4js connect logger when the log level has a higher severity than INFO since it would not log at that level anyway.
   if (!(settings.loglevel === "WARN" || settings.loglevel == "ERROR"))
