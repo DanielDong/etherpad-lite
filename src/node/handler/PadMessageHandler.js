@@ -75,6 +75,7 @@ exports.setSocketIO = function(socket_io)
  */
 exports.handleConnect = function(client)
 {  
+  stats.meter('handleConnect').mark();
   //Initalize sessioninfos for this new session
   sessioninfos[client.id]={};
 }
